@@ -5,11 +5,7 @@ class Wallet:
         self.wallet_id = wallet_id
         self.balance = 0
         self.last_transaction = "None"
-
-    def get_owner(self):
-        #"""Find who owns this wallet"""
-        pass
-
+        
     def deposit(self, amount):
         """Make a deposit"""
         self.balance += amount

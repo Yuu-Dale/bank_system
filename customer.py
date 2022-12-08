@@ -14,7 +14,8 @@ class Customer:
         self.user_name = user_name#user name is unique for each customer
         self.wallet_list = []
         self.wallet_id_list = []
-    
+
+
     def get_wallet(self, wallet_id):
         """Get a wallet by wallet id"""
         for wallet in self.wallet_list:
