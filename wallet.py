@@ -18,7 +18,6 @@ class Wallet:
     def withdraw(self, amount):
         """free withdraw"""
         if amount >= self.balance:
-            print("Sorry, you don't have enough money, please try a small amount.")
             sign = "f"#f for fail
         else:
             self.balance -= amount
@@ -26,7 +25,7 @@ class Wallet:
             sign = "s"#s for success
         return sign
 
-    def transfer_to_wallets(self, wallet_id_to, amount):
+    def transfer_to_wallets(self, wallet_id_to, amount,):
         """Transfer among wallets, 0.5% fee"""
         if amount * 1.005 >= self.balance:
             sign = "f"#f for fail
@@ -38,6 +37,7 @@ class Wallet:
             self.last_transaction = f"Transfer {amount} to wallet({wallet_id_to})"
             sign = "s"#s for success
         return sign, fee#fee will go to the system account
+
 
     def transfer_to_other_customers(self, customer, amount):
         """Transfer to others, 1.5% fee, the receiving wallet is arranged according to the number of its' functions"""
@@ -80,7 +80,6 @@ class DailyUseWallet(Wallet):
         """Initialize parent class attributes"""
         super().__init__(wallet_id)
         self.wallet_type = "Daily Use"
-
 
 class SavingWallet(Wallet):
     """The unique feature of a saving wallet"""
