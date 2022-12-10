@@ -21,19 +21,18 @@ class Wallet:
             sign = "s"#s for success
         return sign
 
-    def transfer_to_wallets(self, wallet_id_to, amount,):
+    def transfer_to_wallets(self, wallet_to, amount):
         """Transfer among wallets, 0.5% fee"""
         if amount * 1.005 >= self.balance:
             sign = "f"#f for fail
             fee = 0
         else:
             self.balance -= amount * 1.005#0.5% fee
-            wallet_id_to.balance += amount
+            wallet_to.balance += amount
             fee = amount * 0.005
-            self.last_transaction = f"Transfer {amount} to wallet({wallet_id_to})"
+            self.last_transaction = f"Transfer {amount} to wallet({wallet_to})"
             sign = "s"#s for success
         return sign, fee#fee will go to the system account
-
 
     def transfer_to_other_customers(self, customer, amount):
         """Transfer to others, 1.5% fee, the receiving wallet is arranged according to the number of its' functions"""
@@ -48,25 +47,29 @@ class Wallet:
                     wallet.balance += amount
                     fee = amount * 0.015
                     self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
-                    sgin = "s"#s for success
+                    sign = "s"#s for success
+                    break
                 elif wallet.wallet_type == "Holidays":#3 functions
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
                     self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
+                    break
                 elif wallet.wallet_type == "Saving":#2 functions
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
                     self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
+                    break
                 elif wallet.wallet_type == "Mortgage":#1 function
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
                     self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
+                    break
         return sign, fee#fee will go to the system account
      
        
@@ -84,7 +87,7 @@ class SavingWallet(Wallet):
         super().__init__(wallet_id)
         self.wallet_type = "Saving"
 
-    def transfer_to_wallets(self, wallet_id_to, amount):
+    def transfer_to_wallets(self, wallet_to, amount):
         """Saving wallets are not allowed to transfer to other wallet"""
         sign = "n"#n for not allowed
         fee = 0
@@ -121,7 +124,7 @@ class MortgageWallet(Wallet):
         sign = "n"#n for not allowed
         return sign
 
-    def transfer_to_wallets(self, wallet_id_to, amount):
+    def transfer_to_wallets(self, wallet_to, amount):
         """Mortgage wallets are not allowed to transfer to other wallet"""
         sign = "n"#n for not allowed
         fee = 0
