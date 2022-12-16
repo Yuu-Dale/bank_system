@@ -1,3 +1,22 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tues Dec 13 16:21:00 2022
+
+@ author: Jinyu Meng(sw22365@bristol.ac.uk)
+The banking system mainly contains the following functions:
+1.sign up: which is used to create a new account.
+2.log in: which is used to log in the system.
+3.select service: which is used to select the service before log in.
+4.select customer service: which is used to select the service after log in.
+5.input sign up information: which is used to input the information of sign up.
+6.input login information: which is used to input the information of log in.
+7.check word: which is used to check if the word is valid.
+8.check age: which is used to check if the number is valid.
+9.check email: which is used to check if the email is valid.
+10.check password: which is used to check if the password is valid.
+11.check user name: which is used to check if the user name is valid.
+"""
+
 from customer import *
 from wallet import *
 from email.utils import parseaddr

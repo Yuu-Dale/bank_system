@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tues Dec 13 16:21:00 2022
+
+This is the wallet class, which is used to create a wallet object, and the wallet object contains the following functions:
+1.deposit: which is used to deposit money.
+2.withdraw: which is used to withdraw money.
+3.transfer to wallets: which is used to transfer money to other wallets of the same customer.
+4.transfer to other_customers: which is used to transfer money to other customers.
+
+Wallets are created by the customer class, and the customer class will create wallet objects for each customer.
+All functions are written in the wallet class, and then create 4 subclasses to inherit all the methods and variables of the parent class.
+When the wallet corresponding to the subclass has no function, rewrite the method of the parent class to achieve functional control。
+@ author: Jinyu Meng(sw22365@bristol.ac.uk)
+"""
+
 class Wallet:
 
     def __init__(self, wallet_id):
@@ -23,20 +39,20 @@ class Wallet:
 
     def transfer_to_wallets(self, wallet_to, amount):
         """Transfer among wallets, 0.5% fee"""
-        if amount * 1.005 >= self.balance:
+        if amount * 1.005  > self.balance:
             sign = "f"#f for fail
             fee = 0
         else:
-            self.balance -= amount * 1.005#0.5% fee
+            self.balance -= amount * 1.005 #0.5% fee
             wallet_to.balance += amount
             fee = amount * 0.005
-            self.last_transaction = f"Transfer {amount * 1.005} to wallet({wallet_to.wallet_id})"
+            self.last_transaction = f"Transfer {amount} to wallet({wallet_to.wallet_id})"
             sign = "s"#s for success
         return sign, fee#fee will go to the system account
 
     def transfer_to_other_customers(self, customer, amount):
         """Transfer to others, 1.5% fee, the receiving wallet is arranged according to the number of its' functions"""
-        if amount * 1.015 >= self.balance:
+        if amount * 1.015 > self.balance:
             sign = "f"#f for fail
             fee = 0
         else:
@@ -45,28 +61,28 @@ class Wallet:
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
-                    self.last_transaction = f"Transfer {amount * 1.015} to customer({customer.user_name})"
+                    self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
                     break
                 elif wallet.wallet_type == "Holidays":#3 functions
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
-                    self.last_transaction = f"Transfer {amount * 1.015} to customer({customer.user_name})"
+                    self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
                     break
                 elif wallet.wallet_type == "Saving":#2 functions
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
-                    self.last_transaction = f"Transfer {amount * 1.015} to customer({customer.user_name})"
+                    self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
                     break
                 elif wallet.wallet_type == "Mortgage":#1 function
                     self.balance -= amount * 1.015
                     wallet.balance += amount
                     fee = amount * 0.015
-                    self.last_transaction = f"Transfer {amount * 1.015} to customer({customer.user_name})"
+                    self.last_transaction = f"Transfer {amount} to customer({customer.user_name})"
                     sign = "s"#s for success
                     break
         return sign, fee#fee will go to the system account

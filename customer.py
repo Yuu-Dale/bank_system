@@ -1,5 +1,25 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tues Dec 13 16:21:00 2022
+
+@ author: Jinyu Meng(sw22365@bristol.ac.uk)
+This is the customer class which is used to create a customer object, and it contains the following functions:
+1.get wallet: which is used to get a wallet by wallet id.
+2.create wallet: which is used to create a wallet for customer.
+3.delete wallet: which is used to delete a wallet for customer.
+4.change password: which is used to change the password of customer.
+5.deposit: which is used to deposit money into a wallet.
+6.withdraw: which is used to withdraw money from a wallet.
+7.transfer to walelts: which is used to transfer money from one wallet to another wallet of the same customer.
+8.transfer to other customers: which is used to transfer money from one wallet to another wallet of other customers.
+9.find substitution yourself: which is used to find a substitution for the customer when the customer transfer money to other wallet of himself, and the wallet is not enough.
+10.find substitution for other customers: which is used to find a substitution for the customer when the customer transfer money to other wallet of other customers, and the wallet is not enough.
+
+Customers are created by the bank class, and the bank class will create customer objects.
+
+"""
+
 from wallet import *
-# from banking_system import *
 
 class Customer:
 
@@ -132,7 +152,10 @@ class Customer:
     def transfer_to_others(self, wallet_id_from, customer, amount):
         amount = float(amount)
         """Transfer a customer's money to others"""
-        if customer.wallet_list == []:
+        if wallet_id_from in customer.wallet_id_list:
+            print("Transaction fails, you can't transfer money to yourself. Going back...")
+            transaction_fee = 0
+        elif customer.wallet_list == []:
             print("Transaction fails, this customer do not have any wallet.  Going back...")
             transaction_fee = 0
         elif wallet_id_from not in self.wallet_id_list:

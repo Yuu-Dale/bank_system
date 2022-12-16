@@ -1,6 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tues Dec 13 16:21:00 2022
+
+Main function, which is used to create a banking system object and run the system.
+@ author: Jinyu Meng(sw22365@bristol.ac.uk)
+"""
+
 from customer import * 
 from wallet import *
 from banking_system import *
+
 print("-----Welcome to the banking system!-----")
 bank = Banking_system()
 
@@ -21,7 +30,7 @@ while True:
             else:#if the password is correct, go to the customer service page
                 while True:
                     sign = bank.select_customer_service()
-                    customer = bank.customer_dic[information_list[0]]#get the customer object
+                    customer = bank.customer_dic[information_list[0]]#get the current customer's id
                     if sign == "1":
                         while True:
                             print("\n-----Select the transaction service:-----")
@@ -35,33 +44,53 @@ while True:
                             if sign == "1":
                                 wallet_id = input("Please enter the wallet id:")
                                 amount = input("Please enter the amount to deposit:")
-                                customer.deposit(wallet_id, amount)
-                                continue
+                                if float(amount) < 0:
+                                    print("You cannot deposit negative amount! Going back...")
+                                    continue
+                                else:
+                                    customer.deposit(wallet_id, amount)
+                                    continue
                             elif sign == "2":
                                 wallet_id = input("Please enter the wallet id to withdraw:")
                                 amount = input("Please enter the amount:")
-                                customer.withdraw(wallet_id, amount)
-                                continue
+                                if float(amount) < 0:
+                                    print("You cannot withdraw negative amount! Going back...")
+                                    continue
+                                else:
+                                    customer.withdraw(wallet_id, amount)
+                                    continue
                             elif sign == "3":
                                 wallet_id = input("Please enter the wallet id to transfer from:")
                                 wallet_id_to = input("Please enter the wallet id to transfer to:")
                                 wallet_to = customer.get_wallet(wallet_id_to)
                                 amount = input("Please enter the amount:")
-                                fee = customer.transfer_to_wallets(wallet_id, wallet_id_to, amount)
-                                bank.system_revenue += fee
-                                continue
+                                if float(amount) < 0:
+                                    print("You cannot transfer negative amount! Going back...")
+                                    continue
+                                else:
+                                    fee = customer.transfer_to_wallets(wallet_id, wallet_id_to, amount)
+                                    bank.system_revenue += fee
+                                    continue
                             elif sign == "4":
                                 wallet_id = input("Please enter the wallet id to transfer from:")
                                 customer_name = input("Please enter customer's username to transfer to:")
-                                customer_to_transfer = bank.get_customer(customer_name)
-                                if customer_to_transfer == False:
-                                    print("The customer does not exist! Going back...")
+                                if customer_name == customer:
+                                    print("You cannot transfer to yourself! Going back...")
                                     continue
                                 else:
-                                    amount = input("Please enter the amount:")
-                                    fee = customer.transfer_to_others(wallet_id, customer_to_transfer, amount)
-                                    bank.system_revenue += fee
-                                    continue
+                                    customer_to_transfer = bank.get_customer(customer_name)
+                                    if customer_to_transfer == False:
+                                        print("The customer does not exist! Going back...")
+                                        continue
+                                    else:
+                                        amount = input("Please enter the amount:")
+                                        if float(amount) < 0:
+                                            print("You cannot transfer negative amount! Going back...")
+                                            continue
+                                        else:
+                                            fee = customer.transfer_to_others(wallet_id, customer_to_transfer, amount)
+                                            bank.system_revenue += fee
+                                            continue
                             elif sign == "5":
                                 break
                             else:
