@@ -44,8 +44,6 @@ Part 2: Data Analytics
 
 In this section, I use the API of yahoo finance by installing "yahoo_fin.stock_info" package and follow the guide on yahoo official website to use their data.
 
-I use "scipy.stats" package to calculate the Pearson coefficient which can return correlation coefficient and p-value by giving two variables.
-
 I use "scikit-learn" package to use linear-regression model and train the model using the train data set. Then I use the trained model to predict the value of the test data set.
 
 I use "tslearn" which is a Python package that provides machine learning tools for the analysis of time series. This package builds on (and hence depends on) scikit-learn, numpy and scipy libraries. I mainly use "K-shape" Clustering.
