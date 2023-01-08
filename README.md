@@ -49,3 +49,6 @@ I use "scikit-learn" package to use linear-regression model and train the model 
 I use "tslearn" which is a Python package that provides machine learning tools for the analysis of time series. This package builds on (and hence depends on) scikit-learn, numpy and scipy libraries. I mainly use "K-shape" Clustering.
 
 I use "statsmodels" package, which is a Python module that provides classes and functions for the estimation of many different statistical models, as well as for conducting statistical tests, and statistical data exploration. An extensive list of result statistics are available for each estimator. The results are tested against existing statistical packages to ensure that they are correct. The package is released under the open source Modified BSD (3-clause) license. And I use it to make "t-test", decide p and q for "ARIMA" model and use the "ARIMA" model.
+
+A link of GitHub repository：
+https://github.com/Jinyu-Meng/sw22365_EMATM0048.git
